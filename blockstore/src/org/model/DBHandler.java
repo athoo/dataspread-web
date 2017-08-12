@@ -16,6 +16,7 @@ import java.sql.Statement;
 public class DBHandler implements ServletContextListener {
     public static DBHandler instance;
     private DataSource ds;
+    DBListener dbListener;
 
     public static void connectToDB(String url, String driver, String userName, String password) {
         DBHandler.instance = new DBHandler();
@@ -66,6 +67,8 @@ public class DBHandler implements ServletContextListener {
         createBookTable();
         createUserTable();
         createUserTablesTable();
+        dbListener = new DBListener();
+        dbListener.start();
     }
 
     @Override
